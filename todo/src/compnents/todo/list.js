@@ -1,45 +1,22 @@
 import React from 'react';
-import {useState} from 'react';
-
-
-// class TodoList extends React.Component {
-
-//   render() {
-//     return (
-//       <ul>
-//         {this.props.list.map(item => (
-//           <li
-//             className={`complete-${item.complete.toString()}`}
-//             key={item._id}
-//           >
-//             <span onClick={() => this.props.handleComplete(item._id)}>
-//               {item.text}
-//             </span>
-//           </li>
-//         ))}
-//       </ul>
-//     );
-//   }
-// }
-
+// import {useState} from 'react';
+import { ListGroup } from 'react-bootstrap';
 
 function TodoList (props){
 
-  const[]=useState()
 
   return (
-    <ul>
+    <ListGroup>
       {props.list.map(item => (
-        <li
+        <ListGroup.Item
           className={`complete-${item.complete.toString()}`}
-          key={item._id}
-        >
+          key={item._id}>
           <span onClick={() => props.handleComplete(item._id)}>
             {item.text}
           </span>
-        </li>
+        </ListGroup.Item>
       ))}
-    </ul>
+    </ListGroup>
   );
 
 }
