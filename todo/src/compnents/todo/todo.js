@@ -12,7 +12,7 @@ function ToDo(props) {
     item._id = Math.random();
     item.complete = false;
     setList([...list, item]);
-    console.log('llll',list)
+    // console.log('llll',list)
   };
 
 

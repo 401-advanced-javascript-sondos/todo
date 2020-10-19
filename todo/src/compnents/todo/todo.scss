@@ -67,34 +67,86 @@ body, html {
         width: fit-content;
         border-radius: 8%;
     }
-    .list-group{
-        border: 1px solid rgb(177, 173, 173);
-    // border-radius: 5%;  
+    // .list-group{
+    //     border: 1px solid rgb(177, 173, 173);
+    // // border-radius: 5%;  
 
     .list-group-item{
-        padding: 10px;
-        padding-left: 60px;
-        padding-right: 60px;
+        border-radius: 5%;
+        // padding: 10px;
+        border: 1px solid rgb(177, 173, 173);
+        // padding-left: 20px;
+        // padding-right: 20px;
         border: 1px solid rgb(40, 212, 161);
-        background-color: green;
+        // background-color: green;
         
-            align-items: center;
-            display:flex;
-            flex-direction:row;
-            font-size: .75em;
+            // align-items: center;
+            // display:flex;
+            // flex-direction:row;
+            // font-size: .75em;
             margin: .75em .5em;
+            width: 200px;
+  
+        
+.firstRow{
 
-            &.complete-true {
-              span {
-                background: pink;
-                text-decoration:line-through;
-                &:hover {
-                   background: seagreen;
-                }
-              }}
+border-bottom: 1px solid #cecccc;
+padding: 2%;
+margin: 0%;
+
+div{
+    width: fit-content;
+    // display: inline-block;
+    // padding-right: 30px;
+    // justify-content:space-around;
+    // align-items: end;
+}
+          
+.complete-true {
+    span {
+      background: rgb(238, 55, 86);
+      &:hover {
+        background: rgb(81, 126, 129);
+     }
+    }
+}
+
+.complete-false {
+    span {
+      background: rgb(5, 138, 56);
+      &:hover {
+         background: rgb(81, 126, 129);
+      }
+    }
+}
+
+button{
+    padding: 0;
+    height: 20px;
+    width: 20px;
+    
+}
+
+}
+.firstRow col{
+display: inline-flex;
+flex-direction: row;
+}
+.end{
+    text-align: end;
+    font-size: 80%;
+    padding-right: 4%;
+
+}
+.textItem{
+    padding-left: 4%;
+    font-size: 125%;
+}
+
+           
 
     }
-    }
+    // }
     // ul {
     //     list-style-type:none;
     //     margin:0;
