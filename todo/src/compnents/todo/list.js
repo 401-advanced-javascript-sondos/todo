@@ -1,29 +1,43 @@
-import React from 'react';
-// import {useState} from 'react';
-import { ListGroup, Navbar, Nav, Col, Row } from 'react-bootstrap';
+import React , {useContext} from 'react';
+// import {useContext} from 'react';
+import { ListGroup, Nav } from 'react-bootstrap';
+
+import {ToggelContext} from '../../cotext/show';
+import {PanginationContext} from '../../cotext/pangination';
+// import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 
 function TodoList(props) {
 
-  console.log('lisiprop', props.list)
+  console.log('lisiprop', props.list);
+
+const toggelContext=useContext(ToggelContext);
+console.log('toggel',toggelContext)
+const pangination=useContext(PanginationContext);
+
+
   return (
     <ListGroup>
-      {props.list.map(item => (
+      
+      {pangination.currentItems.map(item => (
 
         <Nav >
           <ListGroup.Item
-            // className={`complete-${item.complete.toString()}`}
+            className={`complete-${item.complete}-${toggelContext.status}`}
             key={item._id}>
 
-            <Row className='firstRow'>
+            <Row className = {`firstRow`} >
+
               <Col key={item._id} className={`complete-${item.complete}`} onClick={() => props.handleComplete(item._id)} >
-                <span>
                   {item.complete? 'complete':'pending'}
-                </span>
               </Col>
 
-              <Col>
+              <Col  md="auto">
                 {item.assignee}
               </Col>
 
@@ -31,6 +45,7 @@ function TodoList(props) {
                 < button onClick={() => props.handleDelete(item._id)} >
                   x</button>
               </Col>
+
             </Row>
 
             <Row>
