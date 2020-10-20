@@ -1,89 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Navbar } from 'react-bootstrap';
+import { Container, Navbar, Col, Row } from 'react-bootstrap';
 import TodoForm from './form.js';
 import TodoList from './list.js';
 import useAjax from '../../hooks/useAjax'
 
 import './todo.scss';
+import ToggelIem from '../../cotext/show';
+import ToggelContent from './toggel.js';
+import PanginationContext from '../../cotext/pangination';
+import InputPage from './pagenumber';
+import PaginationContent from './pagination';
 
-// const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo';
-// const todoAPI = 'https://restyserver.herokuapp.com/';
+
+
 
 const ToDo = () => {
 
 
   const [_addItem, _toggleComplete, _getTodoItems, _deleteItem, list] = useAjax();
-  // const [list, setList] = useState([]);
-
-  // const _addItem = (item) => {
-  //   item.due = new Date();
-  //   fetch(todoAPI, {
-  //     method: 'post',
-  //     mode: 'cors',
-  //     cache: 'no-cache',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify(item)
-  //   })
-  //     .then(response => response.json())
-  //     .then(savedItem => {
-  //       setList([...list, savedItem])
-  //     })
-  //     .catch(console.error);
-  // };
-
-  // const _toggleComplete = id => {
-
-  //   let item = list.filter(i => i._id === id)[0] || {};
-
-  //   if (item._id) {
-
-  //     item.complete = !item.complete;
-
-  //     let url = `${todoAPI}/${id}`;
-
-  //     fetch(url, {
-  //       method: 'put',
-  //       mode: 'cors',
-  //       cache: 'no-cache',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify(item)
-  //     })
-  //       .then(response => response.json())
-  //       .then(savedItem => {
-  //         setList(list.map(listItem => listItem._id === item._id ? savedItem : listItem));
-  //       })
-  //       .catch(console.error);
-  //   }
-  // };
-
-  // const _getTodoItems = () => {
-  //   fetch(todoAPI, {
-  //     method: 'get',
-  //     mode: 'cors',
-  //   })
-  //     .then(data => data.json())
-  //     .then(data => setList(data.results))
-  //     .catch(console.error);
-  // };
 
 
-  // useEffect(() => {
-  //   let list = [
-  //     { _id: 1, complete: false, text: 'Clean the Kitchen', difficulty: 3, assignee: 'Person A' },
-  //     { _id: 2, complete: false, text: 'Do the Laundry', difficulty: 2, assignee: 'Person A' },
-  //     { _id: 3, complete: false, text: 'Walk the Dog', difficulty: 4, assignee: 'Person B' },
-  //     { _id: 4, complete: true, text: 'Do Homework', difficulty: 3, assignee: 'Person C' },
-  //     { _id: 5, complete: false, text: 'Take a Nap', difficulty: 1, assignee: 'Person B' },
-  //   ];
-
-  //   setList(list);
-  //   console.log('list', list);
-
-  //   document.title = `list:${list.filter((item) => !item.complete).length}`
-
-  // }, [])
-
-  
   useEffect(() => {
     document.title = `list:${list.filter((item) => !item.complete).length}`
   }, [list])
@@ -95,7 +31,6 @@ const ToDo = () => {
 
   return (
     <>
-
       <Container className="contanier">
 
         <Navbar bg="primary" variant="dark" id="home">
@@ -115,20 +50,48 @@ const ToDo = () => {
 
 
         <section className="todo">
-
           <div>
             <TodoForm handleSubmit={_addItem} />
           </div>
 
-          <div>
-            <TodoList
-              list={list}
-              handleComplete={_toggleComplete}
-              handleDelete={_deleteItem}
-            />
-          </div>
+         
+            <ToggelIem list={list} >
+            <PanginationContext list={list}>
+              <div>
+                <Row className="toggel">
+
+                  <Col>
+                    <Col>
+                      <InputPage />
+                    </Col>
+                    <Col>
+                      <ToggelContent />
+                    </Col>
+
+                  </Col>
+                  <Col>
+
+                    <TodoList
+                      list={list}
+                      handleComplete={_toggleComplete}
+                      handleDelete={_deleteItem}
+                    />
+                  </Col>
+                  <div className='Pagination'>
+              <PaginationContent totalItems={list.length}/>
+            </div >
+                </Row>
+              </div>
+             
+
+          </PanginationContext>
+
+            </ToggelIem>
+
+           
         </section>
-        </Container>
+      </Container>
+
     </>
   );
 };
