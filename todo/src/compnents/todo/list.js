@@ -17,10 +17,9 @@ function TodoList(props) {
             key={item._id}>
 
             <Row className='firstRow'>
-              <Col key={item._id} className={`complete-${item.complete.toString()}`} onClick={() => props.handleComplete(item._id)} >
+              <Col key={item._id} className={`complete-${item.complete}`} onClick={() => props.handleComplete(item._id)} >
                 <span>
-                  {`${item.complete}`? 'complete' : 'pending'}
-      
+                  {item.complete? 'complete':'pending'}
                 </span>
               </Col>
 
