@@ -25,3 +25,11 @@ to start the app:
 ![img](uml2.png)
 
 
+## output 3 should like be :
+![img](todo3.png)
+
+## UML :
+![img](uml3.png)
+
+
+
