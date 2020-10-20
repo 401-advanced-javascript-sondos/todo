@@ -1,58 +1,48 @@
 import React from 'react';
-import { useState } from 'react';
-import { Button, Form,Card } from 'react-bootstrap';
+// import { useState } from 'react';
+import { Button, Form, Card } from 'react-bootstrap';
+import useForm from '../../hooks/useForm';
 
 
 
 function TodoForm(props) {
 
+  const [handleSubmit, handleChange, values] = useForm(todoForm)
 
-  const [item, setItem] = useState({});
 
-  const handleInputChange = e => {
-    // console.log('item',item);
-    setItem({ ...item, [e.target.name]: e.target.value });
-    // console.log('itemafter',item);
-
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    e.target.reset();
-    props.handleSubmit(item);
-    // const item = {};
-    setItem({ item });
-    console.log('sub',item)
-  };
+  function todoForm (item) {
+    props.handleSubmit(item)
+    // console.log('item',item)
+  }
 
 
   return (
     <>
-    <Card style={{ width: '18rem' }}>
-    <Card.Body>
-      <h3>Add Item</h3>
-      <Form onSubmit={handleSubmit}>
+      <Card style={{ width: '18rem' }}>
+        <Card.Body>
+          <h3>Add Item</h3>
+          <Form onSubmit={handleSubmit}>
 
-        <Form.Label>
-          <span>To Do Item</span>
-          <Form.Control name="text"
-            placeholder="Add To Do List Item"
-            onChange={handleInputChange} />
-        </Form.Label>
+            <Form.Label>
+              <span>To Do Item</span>
+              <Form.Control name="text"
+                placeholder="Add To Do List Item"
+                onChange={handleChange} />
+            </Form.Label>
 
-        <Form.Label>
-          <span>Difficulty Rating</span>
-          <Form.Control defaultValue="1" type="range" min="1" max="5" name="difficulty" onChange={handleInputChange} />
-        </Form.Label>
+            <Form.Label>
+              <span>Difficulty Rating</span>
+              <Form.Control defaultValue="1" type="range" min="1" max="5" name="difficulty" onChange={handleChange} />
+            </Form.Label>
 
-        <Form.Label>
-          <span>Assigned To</span>
-          <Form.Control type="text" name="assignee" placeholder="Assigned To" onChange={handleInputChange} />
-        </Form.Label>
+            <Form.Label>
+              <span>Assigned To</span>
+              <Form.Control type="text" name="assignee" placeholder="Assigned To" onChange={handleChange} />
+            </Form.Label>
 
-        <button variant="primary"> Add Item </button>
-      </Form>
-     </Card.Body>
+            <Button variant="primary" type='submit'> Add Item </Button>
+          </Form>
+        </Card.Body>
       </Card>
     </>
   );
