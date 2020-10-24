@@ -10,6 +10,7 @@ import ToggelContent from './toggel.js';
 import PanginationContext from '../../cotext/pangination';
 import InputPage from './pagenumber';
 import PaginationContent from './pagination';
+import Auth from '../../auth/auth';
 
 
 
@@ -39,23 +40,26 @@ const ToDo = () => {
           </h2>
         </Navbar>
 
-        <Navbar bg="primary" variant="dark" id="itemNumber" >
-          <h2>
-            <Navbar.Brand>
-              There are {list.filter((item) => !item.complete).length} Items To Complete
+        <Auth capability="read">
+          <Navbar bg="primary" variant="dark" id="itemNumber" >
+            <h2>
+              <Navbar.Brand>
+                There are {list.filter((item) => !item.complete).length} Items To Complete
 
           </Navbar.Brand>
-          </h2>
-        </Navbar>
-
+            </h2>
+          </Navbar>
+        </Auth >
 
         <section className="todo">
-          <div>
-            <TodoForm handleSubmit={_addItem} />
-          </div>
 
-         
-            <ToggelIem list={list} >
+          <Auth capability="create">
+            <div>
+              <TodoForm handleSubmit={_addItem} />
+            </div>
+          </Auth >
+
+          <ToggelIem list={list} >
             <PanginationContext list={list}>
               <div>
                 <Row className="toggel">
@@ -78,17 +82,17 @@ const ToDo = () => {
                     />
                   </Col>
                   <div className='Pagination'>
-              <PaginationContent totalItems={list.length}/>
-            </div >
+                    <PaginationContent totalItems={list.length} />
+                  </div >
                 </Row>
               </div>
-             
 
-          </PanginationContext>
 
-            </ToggelIem>
+            </PanginationContext>
 
-           
+          </ToggelIem>
+
+
         </section>
       </Container>
 
