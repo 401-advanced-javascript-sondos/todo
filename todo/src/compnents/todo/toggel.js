@@ -9,7 +9,7 @@ class ToggelContent extends React.Component {
 
     render() {
 
-// console.log('context',this.contextType)
+console.log('toggel',this.context.toggelStatus)
         return (
 
             <>

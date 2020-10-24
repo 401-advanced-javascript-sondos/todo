@@ -5,11 +5,16 @@ body, html {
     width: 100%;
 }
 
-#home{
-    background-color: rgb(84, 146, 228);
-    padding: 15px;
+.end{
+    text-align: end;
+    font-size: 80%;
+    padding-right: 4%;
+
 }
 
+.complete-true-show{
+    display: none!important
+ }
 #itemNumber{
     margin: 30px;
     padding: 5px;
@@ -206,9 +211,8 @@ flex-direction: row;
 
 }
 
-.complete-true-show{
-    display: none;
- }
+
+
 .Pagination{
     display: flex;
     padding-left: 0;

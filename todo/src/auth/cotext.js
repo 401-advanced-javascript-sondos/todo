@@ -26,31 +26,18 @@ class LoginProvider extends React.Component {
             logout: this.logout,
             user: {},
             can: this.can,
-            signup:this.signup
+            signup: this.signup
         };
     }
 
-    // can = (action)=> {
-    //     const actions = {
-    //         admin: ['update', 'delete', 'read'],
-    //         user : ['read'],
-    //         editor: ['edit', 'read']
-    //     };
-
-    //     const role = this.state.user.capabilities;
-    //     console.log("role : ",role)
-    //     // console.log("actions[role].includes(action): ",actions[role].includes(action))
-    //     // return actions[role].includes(action)
-
-    // }
 
 
     can = capability => {
         // console.log('role',capability)
-        console.log('check role',this.state.user.capabilities)
+        // console.log('check role', this.state.user.capabilities)
 
         return this.state.user?.capabilities?.includes(capability);
-      };
+    };
 
 
     login = async (username, password) => {
@@ -80,7 +67,7 @@ class LoginProvider extends React.Component {
         console.log(token)
 
         try {
-               let user = jwt.decode(token, process.env.REACT_APP_SECRET);
+            let user = jwt.decode(token, process.env.REACT_APP_SECRET);
             console.log('user', user)
             console.log('all good');
             this.setLoginState(true, token, user);
@@ -110,7 +97,7 @@ class LoginProvider extends React.Component {
 
 
     signup = async (username, password, email, role) => {
-console.log('here')
+        console.log('here signup')
         try {
             const results = await fetch(`${API}/signup`, {
                 method: 'POST',
@@ -118,8 +105,8 @@ console.log('here')
                 cache: 'no-cache',
                 headers: {
                     'Content-Type': 'application/json'
-                  },
-                body:JSON.stringify({ username, password, email, role })
+                },
+                body: JSON.stringify({ username, password, email, role })
             });
             let res = await results.json();
             this.validateToken(res.token);

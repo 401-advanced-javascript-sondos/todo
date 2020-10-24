@@ -1,4 +1,6 @@
 import React, { useContext } from 'react';
+import { Container, Navbar, Col, Row } from 'react-bootstrap';
+import '../src/compnents/todo/todo.scss';
 
 // import ToDo from './compnents/todo/todo.js';
 import ToDoconnected from './compnents/todo/todo-connected';
@@ -18,7 +20,19 @@ export default class App extends React.Component {
     return (
       <>
         <LoginContext >
-          <Login />
+
+          <Navbar bg="primary" variant="dark" id="home">
+            <Col>
+              <h2>
+                <Navbar.Brand href="#home" >Home</Navbar.Brand>
+              </h2>
+            </Col>
+            <Col className="end">
+
+              <Login />
+            </Col>
+
+          </Navbar>
           <SignUp />
           <Auth condition={this.context.loggedIn}>
             <ToDoconnected />

@@ -19,17 +19,18 @@ class SignUP extends React.Component {
       username: '',
       password: '',
       email: '',
-      role: 'user',
+      role: 'admin',
     };
   }
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
+    console.log(e.target.value)
   }
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log('up',this.context)
+    console.log('signup', this.state)
     this.context.signup(this.state.username, this.state.password, this.state.email, this.state.role);
   }
 
@@ -80,7 +81,7 @@ class SignUP extends React.Component {
 
                 <Form.Group controlId="formGridPassword">
                   <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" placeholder="Password" name='Password' onChange={this.handleChange} />
+                  <Form.Control type="password" placeholder="Password" name='password' onChange={this.handleChange} />
                 </Form.Group>
                 <Form.Group controlId="formGridPassword">
                   <Form.Label>Email</Form.Label>

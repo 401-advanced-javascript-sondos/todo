@@ -13,15 +13,15 @@ class Auth extends React.Component{
 
     try {
        okToRender =
-      //  this.context.loggedIn &&
-      //   (this.props.capability
-      //     ? this.context.user.capabilities.includes(this.props.capability)
-      //     : true);
-        this.context.loggedIn &&  ( this.props.capability? this.context.can(this.props.capability): true);
-        console.log('login auth',this.context.loggedIn)
+       this.context.loggedIn &&
+        (this.props.capability
+          ? this.context.user.capabilities.includes(this.props.capability)
+          : true);
+        // this.context.loggedIn &&  ( this.props.capability? this.context.can(this.props.capability): true);
+        // console.log('login auth',this.context.loggedIn)
         // console.log('capability  auth', this.context.can(this.props.capability))
 
-        console.log('okToRender',this.context.user)
+        console.log('cabi',this.context.user)
     } catch {
       console.warn('not authorized to do that');
     }
