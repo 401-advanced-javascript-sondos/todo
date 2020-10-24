@@ -1,14 +1,15 @@
-import React , {useContext} from 'react';
-// import {useContext} from 'react';
-import { ListGroup, Nav } from 'react-bootstrap';
-
-import {ToggelContext} from '../../cotext/show';
-import {PanginationContext} from '../../cotext/pangination';
-// import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
+import React, { useContext } from 'react';
+import { ListGroup, Nav, Toast, Badge, } from 'react-bootstrap';
+import { ToggelContext } from '../../cotext/show';
+import { PanginationContext } from '../../cotext/pangination';
+// import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Auth from '../../auth/auth'
+import { LoginContext } from '../../auth/cotext';
+import InputPage from './pagenumber';
+import ToggelContent from './toggel.js';
+import './todo.scss';
 
 
 
@@ -16,59 +17,67 @@ function TodoList(props) {
 
   console.log('lisiprop', props.list);
 
-const toggelContext=useContext(ToggelContext);
-console.log('toggel',toggelContext)
-const pangination=useContext(PanginationContext);
-
+  const toggelContext = useContext(ToggelContext);
+  console.log('toggel', toggelContext)
+  const pangination = useContext(PanginationContext);
+  const loginContext = useContext(LoginContext);
+  const badgeCursor = loginContext.can('update') ? 'pointer' : 'default';
 
   return (
-    <ListGroup>
-      
+    // <ListGroup>
+    <>
+
+      <Col>
+        <InputPage />
+      </Col>
+      <Col>
+        <ToggelContent />
+      </Col>
+
+      {/* </Row> */}
       {pangination.currentItems.map(item => (
 
-        <Nav >
-          <ListGroup.Item
-            className={`complete-${item.complete}-${toggelContext.status}`}
-            key={item._id}>
 
-            <Row className = {`firstRow`} >
 
-              <Col key={item._id} className={`complete-${item.complete}`} onClick={() => props.handleComplete(item._id)} >
-                  {item.complete? 'complete':'pending'}
-              </Col>
+        <Toast className={`complete-${item.complete}-${toggelContext.status}`}
+        // key={item._id} style={{position: 'relative'}} onClick={() => props.handleDelete(item._id)}
+        >
+          <Toast
+            key={item._id}
+            onClose={() => loginContext.can('delete') && props.handleDelete(item._id)}
+            style={{ position: 'relative' }}
+          >
 
-              <Col  md="auto">
-                {item.assignee}
-              </Col>
+            <Toast.Header >
+              <Auth capabilty="read">
+                <Badge
+                  pill
+                  className={`complete-${item.complete}`}
+                  //  onClick={() => props.handleComplete(item._id)}
+                  style={{ marginRight: '15px', cursor: badgeCursor }}
+                  onClick={() => loginContext.can('update') && props.handleComplete(item._id)}
+                  variant={item.complete ? 'danger' : 'success'}
+                >
+                  {item.complete ? 'Complete' : 'Pending'}
+                </Badge>
+              </Auth>
+              <strong className="mr-auto">{item.assignee}</strong>
+            </Toast.Header>
 
-              <Col className='end'>
-                < button onClick={() => props.handleDelete(item._id)} >
-                  x</button>
-              </Col>
+            <Toast.Body>
+              {item.text}
+            </Toast.Body>
 
-            </Row>
+            <small style={{ position: 'absolute', bottom: 5, right: 5 }}>Difficulty: {item.difficulty}</small>
+          </Toast>
 
-            <Row>
-              <Col md="auto" className="textItem">
-                <span>
-                  {item.text}
-                </span>
-              </Col>
-              <Col md={{ span: 9, offset: 3 }} className='end'>
-                <span className='end'>
-                  Difficulty:  {item.difficulty}
-                </span>
-              </Col>
-            </Row>
-
-          </ListGroup.Item>
-        </Nav>
-
+        </Toast>
 
       ))}
-    </ListGroup>
+    </>
   );
 
 }
 
 export default TodoList;
+

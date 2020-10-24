@@ -7,7 +7,7 @@ class ToggelIem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            status: 'show',
+            status: 'hide',
             toggelStatus: this.toggelStatus,
         };
 

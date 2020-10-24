@@ -6,10 +6,11 @@ import useAjax from '../../hooks/useAjax'
 
 import './todo.scss';
 import ToggelIem from '../../cotext/show';
-import ToggelContent from './toggel.js';
+// import ToggelContent from './toggel.js';
 import PanginationContext from '../../cotext/pangination';
-import InputPage from './pagenumber';
+// import InputPage from './pagenumber';
 import PaginationContent from './pagination';
+import Auth from '../../auth/auth';
 
 
 
@@ -33,62 +34,66 @@ const ToDo = () => {
     <>
       <Container className="contanier">
 
-        <Navbar bg="primary" variant="dark" id="home">
-          <h2>
-            <Navbar.Brand href="#home" >Home</Navbar.Brand>
-          </h2>
-        </Navbar>
 
-        <Navbar bg="primary" variant="dark" id="itemNumber" >
-          <h2>
-            <Navbar.Brand>
-              There are {list.filter((item) => !item.complete).length} Items To Complete
+
+        <Auth capability="read">
+          <Navbar bg="primary" variant="dark" id="itemNumber" >
+            <h2>
+              <Navbar.Brand>
+                There are {list.filter((item) => !item.complete).length} Items To Complete
 
           </Navbar.Brand>
-          </h2>
-        </Navbar>
-
+            </h2>
+          </Navbar>
+        </Auth >
 
         <section className="todo">
-          <div>
-            <TodoForm handleSubmit={_addItem} />
-          </div>
-
-         
-            <ToggelIem list={list} >
-            <PanginationContext list={list}>
+          <Auth capability="create">
+            <Col>
               <div>
-                <Row className="toggel">
-
-                  <Col>
-                    <Col>
-                      <InputPage />
-                    </Col>
-                    <Col>
-                      <ToggelContent />
-                    </Col>
-
-                  </Col>
-                  <Col>
-
-                    <TodoList
-                      list={list}
-                      handleComplete={_toggleComplete}
-                      handleDelete={_deleteItem}
-                    />
-                  </Col>
-                  <div className='Pagination'>
-              <PaginationContent totalItems={list.length}/>
-            </div >
-                </Row>
+                <TodoForm handleSubmit={_addItem} />
               </div>
-             
 
-          </PanginationContext>
+            </Col>
+          </Auth >
+
+          <Col>
+            <ToggelIem list={list} >
+              <PanginationContext list={list}>
+                <div>
+                  <Row className="toggel">
+
+                    {/* <Row> */}
+                      {/* <Col>
+                        <InputPage />
+                      </Col>
+                      <Col>
+                        <ToggelContent />
+                      </Col> */}
+{/* 
+                    </Row> */}
+                    <Col>
+
+                      <TodoList
+                        list={list}
+                        handleComplete={_toggleComplete}
+                        handleDelete={_deleteItem}
+                      />
+                      {/* </Col> */}
+                      {/* <Col> */}
+                      <div className='Pagination'>
+                        <PaginationContent totalItems={list.length} />
+                      </div >
+                    </Col>
+                  </Row>
+                </div>
+
+
+              </PanginationContext>
 
             </ToggelIem>
+          </Col>
 
-           
         </section>
       </Container>
 

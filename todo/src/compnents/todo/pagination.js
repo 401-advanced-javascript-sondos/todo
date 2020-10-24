@@ -11,8 +11,8 @@ const PaginationContent = ({ totalItems }) => {
         Numbersofpage.push(i);
     };
 
-console.log('current',Numbersofpage)
-
+    console.log('current', Numbersofpage)
+if(Numbersofpage.length>1){
     return (
         <div>
             <ul className='Pagination'>
@@ -36,7 +36,7 @@ console.log('current',Numbersofpage)
 
 
                 <li>
-                    
+
                     <a onClick={context.current > 1 ? () => context.paginate(context.current++) : () => context.paginate(context.current)}>
                         Next
         </a>
@@ -48,6 +48,25 @@ console.log('current',Numbersofpage)
 
 
     )
+}else{
+    return( 
+        <ul>
+
+
+
+        {Numbersofpage.map(page => (
+            <li key={page} >
+                <a onClick={() => context.paginate(page)}>
+                    {page}
+                </a>
+            </li>
+        ))}
+
+
+        </ul>
+    )
+}
+  
 
 
 
